@@ -1,185 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MY ROBLOX GAMES</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OREO Game Hub</title>
 
-    <style>
-        body {
-            background: #0f172a;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
+<style>
+:root{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --accent:#3b82f6;
+  --text:#fff;
+}
 
-        h1 {
-            margin-top: 40px;
-            color: #3b82f6;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Segoe UI',sans-serif;
+  margin:0;
+}
 
-        h2 {
-            border-bottom: 2px solid #1e293b;
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-        }
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 20px;
+  background:#020617;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
 
-        .section {
-            margin: 50px 0;
-        }
+h1{color:var(--accent);margin:0;font-size:20px;}
 
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.search{
+  padding:8px;
+  border-radius:6px;
+  border:none;
+}
 
-        .card {
-            background: #1e293b;
-            width: 220px;
-            padding: 15px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
+.toggle{
+  cursor:pointer;
+  padding:8px 12px;
+  background:var(--accent);
+  border-radius:6px;
+}
 
-        .card:hover {
-            transform: translateY(-10px);
-            background: #334155;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-        }
+.section{padding:30px 20px;}
 
-        img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
+h2{
+  border-bottom:2px solid #334155;
+  display:inline-block;
+  margin-bottom:20px;
+}
 
-        p {
-            margin: 15px 0;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
+.container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+}
 
-        a {
-            display: block;
-            padding: 10px;
-            background: #3b82f6;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
+.card{
+  background:var(--card);
+  border-radius:12px;
+  padding:10px;
+  transition:.3s;
+  position:relative;
+}
 
-        a:hover {
-            background: #2563eb;
-        }
-    </style>
+.card:hover{transform:scale(1.05);}
+
+img{
+  width:100%;
+  border-radius:10px;
+}
+
+p{text-align:center;font-weight:bold;}
+
+button{
+  width:100%;
+  padding:10px;
+  background:var(--accent);
+  border:none;
+  border-radius:6px;
+  color:white;
+  cursor:pointer;
+}
+
+.favorite{
+  position:absolute;
+  top:10px;
+  right:10px;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.light{
+  --bg:#f1f5f9;
+  --card:#ffffff;
+  --text:#000;
+}
+</style>
 </head>
 
 <body>
 
-    <h1>OREO's FAVORITE GAMES</h1>
+<header>
+  <h1>OREO HUB</h1>
+  <input type="text" class="search" placeholder="Search game..." onkeyup="searchGame()">
+  <div class="toggle" onclick="toggleTheme()">Theme</div>
+</header>
 
-    <div class="section">
-        <h2>PUBLIC SERVERS</h2>
-        <div class="container">
+<!-- PUBLIC SERVERS -->
+<div class="section">
+<h2>PUBLIC SERVERS</h2>
+<div class="container">
 
-    <div class="card">
-        <img src="BLOXFRUIT.jpg" alt="Bloxfruit">
-        <p>BLOXFRUIT</p>
-        <a href="https://www.roblox.com/share?code=678f0f313c670d41a6dd7cd92c8fc67f&type=ExperienceDetails" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="bloxfruit">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="BLOXFRUIT.jpg">
+<p>BLOXFRUIT</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=678f0f313c670d41a6dd7cd92c8fc67f&type=ExperienceDetails" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="CATALOG AVATAR.jpg" alt="Catalog Avatar">
-        <p>CATALOG AVATAR</p>
-        <a href="https://www.roblox.com/share?code=a4fe9bba65f02743ba146cad37f1466c&type=ExperienceDetails" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="catalog avatar">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="CATALOG AVATAR.jpg">
+<p>CATALOG AVATAR</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=a4fe9bba65f02743ba146cad37f1466c&type=ExperienceDetails" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="DEADLY DELIVERY.jpg" alt="Dead Delivery">
-        <p>DEAD DELIVERY</p>
-        <a href="https://www.roblox.com/share?code=7ee69b3360a4cb418292fe5d0f8a3788&type=ExperienceDetails" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="deadly delivery">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="DEADLY DELIVERY.jpg">
+<p>DEAD DELIVERY</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=7ee69b3360a4cb418292fe5d0f8a3788&type=ExperienceDetails" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="DISASTER.jpg" alt="Disaster">
-        <p>DISASTER</p>
-        <a href="https://www.roblox.com/share?code=6246c4f20d311246b0ee896643d3473f&type=ExperienceDetails" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="disaster">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="DISASTER.jpg">
+<p>DISASTER</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=6246c4f20d311246b0ee896643d3473f&type=ExperienceDetails" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="EAT THE WORLD.jpg" alt="Eat The World">
-        <p>EAT THE WORLD</p>
-        <a href="https://www.roblox.com/share?code=5a34ea9e8856a8498ae1716aa7ae835e&type=ExperienceDetails" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="eat the world">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="EAT THE WORLD.jpg">
+<p>EAT THE WORLD</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=5a34ea9e8856a8498ae1716aa7ae835e&type=ExperienceDetails" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="HUNTY ZOMBIES.jpg" alt="Hunty Zombies">
-        <p>HUNTY ZOMBIES</p>
-        <a href="https://www.roblox.com/share?code=b3c29d718ca40842a1b1ee9abfd7d3fd&type=ExperienceDetails" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="hunty zombies">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="HUNTY ZOMBIES.jpg">
+<p>HUNTY ZOMBIES</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=b3c29d718ca40842a1b1ee9abfd7d3fd&type=ExperienceDetails" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="SAILOR PIECE.jpg" alt="Sailor Piece">
-        <p>SAILOR PIECE</p>
-        <a href="https://www.roblox.com/share?code=252f5a1bfda2164983eac17980bb7908&type=ExperienceDetails&stamp=1775618183295" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="sailor piece">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="SAILOR PIECE.jpg">
+<p>SAILOR PIECE</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=252f5a1bfda2164983eac17980bb7908&type=ExperienceDetails" hidden></a>
+</div>
 
-        </div>
-    </div>
+</div>
+</div>
 
+<!-- PRIVATE SERVERS -->
+<div class="section">
+<h2>OREO's SERVERS</h2>
+<div class="container">
 
-    
-    <div class="section">
-        <h2>OREO's SERVERS</h2>
-        <div class="container">
+<div class="card" data-name="catalog avatar">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="CATALOG AVATAR.jpg">
+<p>CATALOG AVATAR</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=52d6d9fe98d0654383b271de91986c31&type=Server" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="CATALOG AVATAR.jpg" alt="Catalog Avatar">
-        <p>CATALOG AVATAR</p>
-        <a href="https://www.roblox.com/share?code=52d6d9fe98d0654383b271de91986c31&type=Server" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="deadly delivery">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="DEADLY DELIVERY.jpg">
+<p>DEAD DELIVERY</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=66f7557e0516484683bb8db89f7902bb&type=Server" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="DEADLY DELIVERY.jpg" alt="Dead Delivery">
-        <p>DEAD DELIVERY</p>
-        <a href="https://www.roblox.com/share?code=66f7557e0516484683bb8db89f7902bb&type=Server" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="eat the world">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="EAT THE WORLD.jpg">
+<p>EAT THE WORLD</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=477bf4b95bb65b478372ee1b42338c68&type=Server" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="EAT THE WORLD.jpg" alt="Eat The World">
-        <p>EAT THE WORLD</p>
-        <a href="https://www.roblox.com/share?code=477bf4b95bb65b478372ee1b42338c68&type=Server" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="hunty zombies">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="HUNTY ZOMBIES.jpg">
+<p>HUNTY ZOMBIES</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=976b92e9c4fc7a4bafda4ea64e9ec6f7&type=Server" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="HUNTY ZOMBIES.jpg" alt="Hunty Zombies">
-        <p>HUNTY ZOMBIES</p>
-        <a href="https://www.roblox.com/share?code=976b92e9c4fc7a4bafda4ea64e9ec6f7&type=Server" target="_blank">PLAY</a>
-    </div>
+<div class="card" data-name="sailor piece">
+<span class="favorite" onclick="fav(this)">☆</span>
+<img src="SAILOR PIECE.jpg">
+<p>SAILOR PIECE</p>
+<button onclick="play(this)">PLAY</button>
+<a href="https://www.roblox.com/share?code=d2d3e336b255a449afa6a96809f30668&type=Server" hidden></a>
+</div>
 
-    <div class="card">
-        <img src="SAILOR PIECE.jpg" alt="Sailor Piece">
-        <p>SAILOR PIECE</p>
-        <a href="https://www.roblox.com/share?code=d2d3e336b255a449afa6a96809f30668&type=Server" target="_blank">PLAY</a>
-    </div>
+</div>
+</div>
 
-        </div>
-    </div>
+<script>
+function play(btn){
+  const link = btn.nextElementSibling.href;
+  window.open(link,'_blank');
+}
+
+function searchGame(){
+  let input=document.querySelector('.search').value.toLowerCase();
+  document.querySelectorAll('.card').forEach(card=>{
+    let name=card.dataset.name;
+    card.style.display=name.includes(input)?'block':'none';
+  });
+}
+
+function toggleTheme(){
+  document.body.classList.toggle('light');
+}
+
+function fav(el){
+  el.textContent = el.textContent === '☆' ? '★' : '☆';
+}
+</script>
 
 </body>
-</html>
+    </html>
+    
