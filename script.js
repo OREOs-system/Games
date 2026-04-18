@@ -6,34 +6,52 @@ function play(btn) {
   btn.innerHTML = '<span class="loading"></span>LOADING...';
   btn.disabled = true;
 
-  const link = btn.nextElementSibling.href;
+  const linkElement = btn.nextElementSibling;
+  const link = linkElement ? linkElement.href : '#';
 
   // Simulate loading time for better UX
   setTimeout(() => {
-    window.open(link, '_blank');
+    if (link && link !== '#') {
+      window.open(link, '_blank');
+    }
     btn.innerHTML = originalText;
     btn.disabled = false;
   }, 1500);
 }
 
 function searchGame() {
-  let input = document.querySelector('.search').value.toLowerCase();
-  let selectedCategory = document.querySelector('.filter').value.toLowerCase();
+  const input = document.querySelector('.search').value.toLowerCase();
+  const selectedCategory = document.querySelector('.filter').value.toLowerCase();
+  const isFavoritesOnly = selectedCategory === 'favorites';
+
   document.querySelectorAll('.card').forEach(card => {
-    let name = card.dataset.name.toLowerCase();
-    let category = card.dataset.category.toLowerCase();
-    let matchesSearch = name.includes(input);
-    let matchesCategory = selectedCategory === 'all' || category === selectedCategory;
-    let shouldShow = matchesSearch && matchesCategory;
+    const name = card.dataset.name.toLowerCase();
+    const category = card.dataset.category.toLowerCase();
+    const matchesSearch = name.includes(input);
+    const matchesCategory = selectedCategory === 'all' ||
+      (isFavoritesOnly && favorites.includes(card.dataset.name)) ||
+      category === selectedCategory;
+    const shouldShow = matchesSearch && matchesCategory;
+
     card.classList.toggle('hidden', !shouldShow);
     card.classList.toggle('show', shouldShow);
 
-    // Add fade animation
     if (shouldShow) {
       card.style.animation = 'cardEntrance 0.4s ease-out';
+    } else {
+      card.style.animation = '';
     }
   });
+
+  const visibleCards = document.querySelectorAll('.card:not(.hidden)');
+  document.getElementById('filterMessage').classList.toggle('hidden', visibleCards.length !== 0);
   updateStats();
+}
+
+function clearFilters() {
+  document.querySelector('.search').value = '';
+  document.querySelector('.filter').value = 'all';
+  searchGame();
 }
 
 function toggleTheme() {
@@ -88,6 +106,7 @@ function updateStats() {
   const privateCards = document.querySelectorAll('.section:last-child .card:not(.hidden)');
 
   document.getElementById('totalGames').textContent = allCards.length;
+  document.getElementById('visibleGames').textContent = visibleCards.length;
   document.getElementById('publicServers').textContent = publicCards.length;
   document.getElementById('privateServers').textContent = privateCards.length;
   document.getElementById('favoritesCount').textContent = favorites.length;
@@ -95,12 +114,14 @@ function updateStats() {
 
 function loadFavorites() {
   favorites.forEach(gameName => {
-    const card = document.querySelector(`[data-name="${gameName}"]`);
-    if (card) {
+    const cards = document.querySelectorAll(`[data-name="${gameName}"]`);
+    cards.forEach(card => {
       const favBtn = card.querySelector('.favorite');
-      favBtn.classList.add('active');
-      favBtn.textContent = '★';
-    }
+      if (favBtn) {
+        favBtn.classList.add('active');
+        favBtn.textContent = '★';
+      }
+    });
   });
 }
 

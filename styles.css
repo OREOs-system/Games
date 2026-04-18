@@ -320,6 +320,10 @@ p {
 }
 
 button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
   padding: 12px 20px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
@@ -332,6 +336,7 @@ button {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  line-height: 1;
 }
 
 button::before {
@@ -567,13 +572,45 @@ footer a:hover {
 }
 
 .card.hidden {
+  display: none !important;
   transform: translateY(50px);
   opacity: 0;
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
 }
 
 .card.show {
   transform: translateY(0);
   opacity: 1;
-}</content>
+}
+
+.filter-message {
+  margin: 0 30px 20px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--accent);
+  font-weight: 700;
+  text-align: center;
+}
+
+.filter-message.hidden {
+  display: none;
+}
+
+.clear-btn {
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clear-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+</content>
 <parameter name="filePath">/workspaces/Games/styles.css

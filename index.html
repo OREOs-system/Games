@@ -18,11 +18,13 @@
   <div class="filter-container">
     <select class="filter" onchange="searchGame()">
       <option value="all">All Categories</option>
+      <option value="favorites">Favorites</option>
       <option value="adventure">Adventure</option>
       <option value="action">Action</option>
       <option value="roleplay">Roleplay</option>
       <option value="survival">Survival</option>
     </select>
+    <button class="clear-btn" onclick="clearFilters()">Reset</button>
   </div>
   <div class="toggle" onclick="toggleTheme()">
     <i class="fas fa-moon"></i>
@@ -34,6 +36,10 @@
   <div class="stat">
     <div class="stat-number" id="totalGames">14</div>
     <div class="stat-label">Total Games</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number" id="visibleGames">14</div>
+    <div class="stat-label">Displayed</div>
   </div>
   <div class="stat">
     <div class="stat-number" id="publicServers">7</div>
@@ -57,7 +63,7 @@
 <div class="card" data-name="bloxfruit" data-category="adventure">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="BLOXFRUIT.jpg" alt="Blox Fruit">
+<img src="assets/images/BLOXFRUIT.jpg" alt="Blox Fruit">
 </div>
 <div class="card-info">
 <p>BLOX FRUIT</p>
@@ -70,7 +76,7 @@
 <div class="card" data-name="catalog avatar" data-category="roleplay">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="CATALOG AVATAR.jpg" alt="Catalog Avatar">
+<img src="assets/images/CATALOG AVATAR.jpg" alt="Catalog Avatar">
 </div>
 <div class="card-info">
 <p>CATALOG AVATAR</p>
@@ -83,7 +89,7 @@
 <div class="card" data-name="deadly delivery" data-category="action">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="DEADLY DELIVERY.jpg" alt="Deadly Delivery">
+<img src="assets/images/DEADLY DELIVERY.jpg" alt="Deadly Delivery">
 </div>
 <div class="card-info">
 <p>DEADLY DELIVERY</p>
@@ -96,7 +102,7 @@
 <div class="card" data-name="disaster" data-category="survival">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="DISASTER.jpg" alt="Disaster">
+<img src="assets/images/DISASTER.jpg" alt="Disaster">
 </div>
 <div class="card-info">
 <p>DISASTER</p>
@@ -109,7 +115,7 @@
 <div class="card" data-name="eat the world" data-category="adventure">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="EAT THE WORLD.jpg" alt="Eat The World">
+<img src="assets/images/EAT THE WORLD.jpg" alt="Eat The World">
 </div>
 <div class="card-info">
 <p>EAT THE WORLD</p>
@@ -122,7 +128,7 @@
 <div class="card" data-name="hunty zombies" data-category="action">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="HUNTY ZOMBIES.jpg" alt="Hunty Zombies">
+<img src="assets/images/HUNTY ZOMBIES.jpg" alt="Hunty Zombies">
 </div>
 <div class="card-info">
 <p>HUNTY ZOMBIES</p>
@@ -135,7 +141,7 @@
 <div class="card" data-name="sailor piece" data-category="adventure">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="SAILOR PIECE.jpg" alt="Sailor Piece">
+<img src="assets/images/SAILOR PIECE.jpg" alt="Sailor Piece">
 </div>
 <div class="card-info">
 <p>SAILOR PIECE</p>
@@ -148,7 +154,7 @@
 <div class="card" data-name="survive the apocalypse" data-category="adventure">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="SURVIVE THE APOCALYPSE.jpg" alt="Survive The Apocalypse">
+<img src="assets/images/SURVIVE THE APOCALYPSE.jpg" alt="Survive The Apocalypse">
 </div>
 <div class="card-info">
 <p>SURVIVE THE APOCALYPSE</p>
@@ -162,6 +168,8 @@
 </div>
 </div>
 
+<div class="filter-message hidden" id="filterMessage">No games match your search or filter.</div>
+
 <!-- PRIVATE SERVERS -->
 <div class="section">
 <h2><i class="fas fa-lock"></i> OREO'S SERVERS</h2>
@@ -170,7 +178,7 @@
 <div class="card" data-name="catalog avatar" data-category="roleplay">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="CATALOG AVATAR.jpg" alt="Catalog Avatar">
+<img src="assets/images/CATALOG AVATAR.jpg" alt="Catalog Avatar">
 </div>
 <div class="card-info">
 <p>CATALOG AVATAR</p>
@@ -183,7 +191,7 @@
 <div class="card" data-name="deadly delivery" data-category="action">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="DEADLY DELIVERY.jpg" alt="Deadly Delivery">
+<img src="assets/images/DEADLY DELIVERY.jpg" alt="Deadly Delivery">
 </div>
 <div class="card-info">
 <p>DEADLY DELIVERY</p>
@@ -196,7 +204,7 @@
 <div class="card" data-name="eat the world" data-category="adventure">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="EAT THE WORLD.jpg" alt="Eat The World">
+<img src="assets/images/EAT THE WORLD.jpg" alt="Eat The World">
 </div>
 <div class="card-info">
 <p>EAT THE WORLD</p>
@@ -209,7 +217,7 @@
 <div class="card" data-name="hunty zombies" data-category="action">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="HUNTY ZOMBIES.jpg" alt="Hunty Zombies">
+<img src="assets/images/HUNTY ZOMBIES.jpg" alt="Hunty Zombies">
 </div>
 <div class="card-info">
 <p>HUNTY ZOMBIES</p>
@@ -222,7 +230,7 @@
 <div class="card" data-name="sailor piece" data-category="adventure">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="SAILOR PIECE.jpg" alt="Sailor Piece">
+<img src="assets/images/SAILOR PIECE.jpg" alt="Sailor Piece">
 </div>
 <div class="card-info">
 <p>SAILOR PIECE</p>
@@ -235,7 +243,7 @@
 <div class="card" data-name="survive the apocalypse" data-category="adventure">
 <span class="favorite" onclick="fav(this)">☆</span>
 <div class="card-image">
-<img src="SURVIVE THE APOCALYPSE.jpg" alt="Survive The Apocalypse">
+<img src="assets/images/SURVIVE THE APOCALYPSE.jpg" alt="Survive The Apocalypse">
 </div>
 <div class="card-info">
 <p>SURVIVE THE APOCALYPSE</p>
