@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>OREO Game Hub</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
@@ -53,6 +56,22 @@
     <div class="stat-number" id="favoritesCount">0</div>
     <div class="stat-label">Favorites</div>
   </div>
+</div>
+
+<!-- Quick Actions Bar -->
+<div class="quick-actions">
+  <button class="action-btn" onclick="clearFilters()">
+    <i class="fas fa-refresh"></i>
+    <span>Reset Filters</span>
+  </button>
+  <button class="action-btn" onclick="document.querySelector('.search').focus()">
+    <i class="fas fa-search"></i>
+    <span>Search</span>
+  </button>
+  <button class="action-btn" onclick="toggleTheme()">
+    <i class="fas fa-moon"></i>
+    <span>Theme</span>
+  </button>
 </div>
 
 <!-- PUBLIC SERVERS -->
@@ -274,13 +293,18 @@
 </div>
 
 <footer>
-  <p>&copy; 2026 OREO Game Hub. All rights reserved.</p>
+  <p>&copy; <span id="currentYear"></span> OREO Game Hub. All rights reserved.</p>
 <h1>
   <a href="#" onclick="alert('To make EASIER ACCESS METHOD')">About</a> |
   <a href="#" onclick="alert('Contact us at jackyalenabo7@gmail.com')">Contact</a> |
   <a href="#" onclick="alert('RESPECT PUBLIC servers')">Privacy</a>
 </h1>
 </footer>
+
+<!-- Back to Top Button -->
+<button id="backToTop" class="back-to-top" onclick="smoothScrollToSection('body')">
+  <i class="fas fa-arrow-up"></i>
+</button>
 
 <script src="script.js"></script>
     
