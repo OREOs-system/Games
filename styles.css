@@ -700,7 +700,7 @@ button:active {
 }
 
 .light footer {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.98);
   border-top: 1px solid var(--border);
 }
 .modal {
@@ -784,7 +784,7 @@ button:active {
 }
 
 footer {
-  background: rgba(15, 15, 35, 0.95);
+  background: rgba(15, 15, 35, 0.98);
   color: var(--text-secondary);
   text-align: center;
   padding: 30px;
@@ -796,10 +796,10 @@ footer {
 }
 
 footer h1 {
-  font-size: 14px;
+  font-size: 16px;
   margin: 15px 0 0 0;
   font-weight: 400;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 footer a {

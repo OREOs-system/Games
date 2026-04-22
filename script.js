@@ -36,13 +36,7 @@ function play(btn) {
   // Simulate loading time for better UX
   setTimeout(() => {
     if (link && link !== '#') {
-      // Add exit animation
-      document.body.style.transition = 'opacity 0.3s ease';
-      document.body.style.opacity = '0';
-      setTimeout(() => {
-        window.open(link, '_blank');
-        document.body.style.opacity = '1';
-      }, 300);
+      window.location.href = link;
     }
     btn.innerHTML = originalText;
     btn.disabled = false;
@@ -86,15 +80,6 @@ function searchGame() {
 
     const filterMessage = document.getElementById('filterMessage');
     filterMessage.classList.toggle('hidden', visibleCount !== 0);
-
-    // Add search result animation
-    if (visibleCount > 0) {
-      filterMessage.textContent = `Found ${visibleCount} game${visibleCount !== 1 ? 's' : ''}`;
-      filterMessage.style.animation = 'none';
-      setTimeout(() => {
-        filterMessage.style.animation = 'fadeInUp 0.5s ease-out';
-      }, 10);
-    }
 
     updateStats();
   }, 300); // Debounce delay
@@ -291,8 +276,6 @@ function detectDeviceCapabilities() {
 
   return { isTouchDevice, isMobile, isDesktopMode };
 }
-
-// Enhanced particle creation for touch devices
 function createParticles(e) {
   const card = e.currentTarget;
   const rect = card.getBoundingClientRect();
